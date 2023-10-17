@@ -1,0 +1,6 @@
+a,b=map(int,input().split())
+a=list(reversed(list(str(a))))
+b=list(reversed(list(str(b))))
+a=int(''.join(a))
+b=int(''.join(b))
+print(max(a,b))
