@@ -35,19 +35,12 @@ for i in range(1,N):
 
 #print([li[i][1] for i in range(N)])
 #print(res_r)
-print(N-co)
-
-
-#print(len(g))
-tmp=set()
 co=co-1
-for i,j in enumerate(res_r[::-1]):
-    if j==co:
-        tmp.add(N-i-1)
+g=[]
+for i in range(N-1,-1,-1):
+    if res_r[i]==co:
         co-=1
-    if co<0:
-        break
-#print(*sorted(g),sep="\n")
-for i in range(N):
-    if i not in tmp:
-        print(li[i][0])
+    else:
+        g.append(li[i][0])
+print(len(g))
+print(*sorted(g),sep="\n")
