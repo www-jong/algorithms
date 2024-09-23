@@ -3,7 +3,8 @@ sys.setrecursionlimit(int(1e5))
 input=sys.stdin.readline
 
 N=int(input())
-nodes=[0]*(N+1)
+nodes=[[0]*(20) for _ in range(N+1)]
+
 depth=[0]*(N+1)
 cal=[0]*(N+1)
 graph=[[] for _ in range(N+1)]
@@ -19,20 +20,26 @@ def dfs(x,dep):
     for y in graph[x]:
         if cal[y]:
             continue
-        nodes[y]=x
+        nodes[y][0]=x
         dfs(y,dep+1)
 
 def lca(a,b):
-    while depth[a]!=depth[b]:
-        if depth[a]>depth[b]:
-            a=nodes[a]
-        else:
-            b=nodes[b]
-    while a!=b:
-        a=nodes[a]
-        b=nodes[b]
-    return a
+    if depth[a]<depth[b]:
+        a,b=b,a
+    for j in range(19,-1,-1):
+        if depth[a]-depth[b]>=2**j:
+            a=nodes[a][j]
+    if a==b:
+        return a
+    for j in range(19,-1,-1):
+        if nodes[a][j]!= nodes[b][j]:
+            a=nodes[a][j]
+            b=nodes[b][j]
+    return nodes[a][0]
 dfs(1,0)
+for i in range(1,20):
+    for j in range(1,N+1):
+        nodes[j][i]=nodes[nodes[j][i-1]][i-1]
 M=int(input())
 for i in range(M):
     a,b,=map(int,input().split())
