@@ -7,8 +7,8 @@ def dstra():
     heapq.heappush(q,(0,S))
     while q:
         dist,now=heapq.heappop(q)
-        if dist>distance[now]:
-            continue
+        if now==D:
+            return
         for v in graph[now]:
             cost=dist+graph[now][v]
             if cost<distance[v]:
@@ -25,7 +25,7 @@ def bfs():
         for before,price in r_graph[now]:
             if distance[before]+graph[before][now]==distance[now]:
                 if (before,now) not in tmp:
-                    tmp.append((before,now))
+                    tmp.add((before,now))
                     q.append(before)
 
 INF=1e9
@@ -33,9 +33,9 @@ while True:
     N,M=map(int,input().split())
     if N==0 and M==0:break
     S,D=map(int,input().split())
-    graph=[dict() for _ in range(N)]
+    graph=[{} for _ in range(N)]
     r_graph=[[] for _ in range(N)]
-    tmp=list()
+    tmp=set()
     for _ in range(M):
         U,V,P=map(int,input().split())
         graph[U][V]=P
