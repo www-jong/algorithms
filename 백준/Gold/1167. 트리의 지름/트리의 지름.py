@@ -1,3 +1,5 @@
+import sys
+sys.setrecursionlimit(10**8)
 def func(x,pa):
     global res
     tmp_val=[0]
