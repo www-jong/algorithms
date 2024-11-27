@@ -10,8 +10,7 @@ for i in range(N):
     for j in range(M):
         if not visit[i][j]:
             tmp=[(i,j)]
-            q=deque()
-            q.append((i,j))
+            q=deque([(i,j)])
             flag=1
             while q:
                 x,y=q.popleft()
@@ -26,7 +25,7 @@ for i in range(N):
                             break
                 if not flag:
                     break
-            if flag:
+            else:
                 res+=1
                 for x,y in tmp:
                     visit[x][y]=1
