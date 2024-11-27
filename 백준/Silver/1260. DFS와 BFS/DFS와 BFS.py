@@ -1,36 +1,37 @@
-from re import L
-import sys
 from collections import deque
-def bfs(g,v,visit):
-    #print(g)
-    queue=deque()
-    queue.append(v)
-    visit[v]=True
-    while queue:
-        s=queue.popleft()
-        print(s,end=' ')
-        for i in g[s]:
-            if not visit[i]:
-                queue.append(i)
-                visit[i]=True
-                
-def dfs(g,v,visit):
-    visit[v]=True
-    print(v,end=' ')
-    for i in g[v]:
-        if not visit[i]:
-            dfs(g,i,visit)
+import sys
+input=sys.stdin.readline
 
-n,m,v=map(int,input().split())
-g=[[] for _ in range(n+1)]
-visit=[False]*(n+1)
-visit2=[False]*(n+1)
-for _ in range(m):
-    a,b=map(int,sys.stdin.readline().split())
-    g[a].append(b)
-    g[b].append(a)
-for i in range(n+1):
-    g[i].sort()
-dfs(g,v,visit2)
-print()
-bfs(g,v,visit)
+def func(now):
+    for next in graph[now]:
+        if not visit[next]:
+            visit[next]=1
+            dfs.append(next)
+            func(next)
+N,M,V=map(int,input().split())
+graph=[[] for _ in range(N+1)]
+for _ in range(M):
+    a,b=map(int,input().split())
+    graph[a].append(b)
+    graph[b].append(a)
+for i in graph:
+    i.sort()
+visit=[0]*(N+1)
+visit[V]=1
+dfs=[V]
+func(V)
+
+bfs=[V]
+q=deque()
+q.append(V)
+visit=[0]*(N+1)
+visit[V]=1
+while q:
+    now=q.popleft()
+    for next in graph[now]:
+        if not visit[next]:
+            q.append(next)
+            visit[next]=1
+            bfs.append(next)
+print(*dfs)
+print(*bfs)
