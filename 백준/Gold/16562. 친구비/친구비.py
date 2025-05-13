@@ -1,6 +1,6 @@
 import sys
 input=sys.stdin.readline
-sys.setrecursionlimit(10**8)
+sys.setrecursionlimit(10**4)
 N,M,K=map(int,input().split())
 price=[0]+list(map(int,input().split()))
 
