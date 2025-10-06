@@ -3,22 +3,8 @@ import sys
 input=sys.stdin.readline
 
 def conv(x,y):
-    nx,ny=x,y
-    if nx<0:
-        if abs(nx)%N==0:
-            nx=0
-        else:
-            nx=N-abs(nx)%N
-    else:
-        nx=nx%N
-    if ny<0:
-        if abs(ny)%M==0:
-            ny=0
-        else:
-            ny=M-abs(ny)%M
-    else:
-        ny%=M
-    return nx,ny
+    return x%N,y%M
+
 
 d=[0,0,1,-1]
 N,M=map(int,input().split())
