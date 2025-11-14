@@ -16,7 +16,6 @@ li=[[] for _ in range(N)]
 for i in range(K):
     a,b=map(int,input().split())
     li[a-1].append(b-1)
-
 check=[-1]*(N)
 for i in range(N):
     visit=[0]*N
