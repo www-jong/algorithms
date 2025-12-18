@@ -5,64 +5,56 @@ INF=float('inf')
 
 
 def func():
-    tot_cost,tot_flow=0,0
-    flow=[[0]*SIZE for _ in range(SIZE)]
+    tot_flow,tot_cost=0,0
     while True:
-        dir=[-1]*SIZE
         dist=[INF]*SIZE
+        parent=[-1]*SIZE
+        edge_idx=[-1]*SIZE
+        inq=[0]*SIZE
         dist[0]=0
         q=deque([0])
-        iq=[0]*SIZE
+        inq[0]=1
         while q:
             now=q.popleft()
-            iq[now]=0
-            for next in graph[now]:
-                if capa[now][next]-flow[now][next]>0 and dist[next]>dist[now]+cost[now][next]:
-                    dist[next]=dist[now]+cost[now][next]
-                    dir[next]=now
-                    if not iq[next]:
+            inq[now]=0
+            for i in range(len(graph[now])):
+                next,cap,c,rev=graph[now][i]
+                if cap>0 and dist[next]>dist[now]+c:
+                    dist[next]=dist[now]+c
+                    parent[next]=now
+                    edge_idx[next]=i
+                    if not inq[next]:
                         q.append(next)
-                        iq[next]=1
-        if dir[sink]==-1:
+                        inq[next]=1
+        if parent[sink]==-1:
             break
-        tmp_flow=INF
+        tot_flow+=1
         b=sink
         while b!=source:
-            a=dir[b]
-            tmp_flow=min(tmp_flow,capa[a][b]-flow[a][b])
+            a=parent[b]
+            idx=edge_idx[b]
+            rev_idx=graph[a][idx][3]
+            graph[a][idx][1]-=1
+            graph[b][rev_idx][1]+=1
+            tot_cost+=graph[a][idx][2]
             b=a
-        b=sink
-        while b!=source:
-            a=dir[b]
-            flow[a][b]+=tmp_flow
-            flow[b][a]-=tmp_flow
-            tot_cost+=cost[a][b]*tmp_flow
-            b=a
-        tot_flow+=tmp_flow
-    return sum(flow[source]),tot_cost
+    return tot_flow,tot_cost
+def add_edge(u,v,cap,c):
+    graph[u].append([v,cap,c,len(graph[v])])
+    graph[v].append([u,0,-c,len(graph[u])-1])
 N,M=map(int,input().split())
 SIZE=N+M+2
 source,sink=0,N+M+1
 graph=[[] for _ in range(SIZE)]
-capa=[[0]*SIZE for _ in range(SIZE)]
-cost=[[0]*SIZE for _ in range(SIZE)]
 
 for i in range(1,N+1):
-    graph[0].append(i)
-    graph[i].append(0)
-    capa[0][i]=1
-for i in range(N+1,N+M+1):
-    graph[i].append(sink)
-    graph[sink].append(i)
-    capa[i][sink]=1
+    add_edge(0,i,1,0)
+for i in range(1,M+1):
+    add_edge(N+i,sink,1,0)
 for i in range(1,N+1):
-    n,*tmp=map(int,input().split())
-    for j in range(0,n*2,2):
-        x,y=tmp[j],tmp[j+1]
-        cost[i][N+x]=y
-        cost[N+x][i]=-y
-        capa[i][N+x]=1
-        graph[i].append(N+x)
-        graph[N+x].append(i)
+    tmp=list(map(int,input().split()))
+    for j in range(tmp[0]):
+        x,y=tmp[2*j+1],tmp[2*j+2]
+        add_edge(i,N+x,i,y)
 
-print(*func())
+print(*func(),sep="\n")
