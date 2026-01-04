@@ -16,16 +16,16 @@ def func(x):
         tmp.append(st)
     if 0<=end<M:
         tmp.append(end)
-    return min(tmp,key=lambda i:(abs(li[i]-x),li[i]))
+    return min(tmp,key=lambda i:(abs(li[i]-x)))
 
 M,N,L=map(int,input().split())
-li=list(map(int,input().split()))
+li=sorted(list(map(int,input().split())))
 res=0
 for i in range(N):
     x,y=map(int,input().split())
     if y>L:
         continue
     tmp=func(x)
-    if abs(li[tmp])-x+y<=L:
+    if abs(li[tmp]-x)+y<=L:
         res+=1
 print(res)
