@@ -1,11 +1,10 @@
-import sys
-N,M,*L=map(int,sys.stdin.read().split())
-A,B,C,D=L[:2],L[2:4],L[4:6],L[6:8]
+N,M,*L=map(int,open(0).read().split())
+A,B,C,D=zip(L[::2],L[1::2])
 R=range
 def K(s,e,v):
  q=[(*s,0)];v[s[0]][s[1]]=1
  for x,y,c in q:
-  if[x,y]==e:return c
+  if(x,y)==e:return c
   for i in R(4):
    X,Y=x+[0,0,1,-1][i],y+[1,-1,0,0][i]
    if 0<=X<=N and 0<=Y<=M and not v[X][Y]:v[X][Y]=x,y;q+=[(X,Y,c+1)]
@@ -17,7 +16,7 @@ def f(a,b,c,d):
  V=[[0]*(M+1)for _ in R(N+1)];x,y=b
  while 1:
   V[x][y]=1
-  if[x,y]==a:break
+  if(x,y)==a:break
   x,y=v[x][y]
  return l+K(c,d,V)
 a,b=f(A,B,C,D),f(C,D,A,B)
