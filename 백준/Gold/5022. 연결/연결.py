@@ -1,12 +1,12 @@
 N,M,*L=map(int,open(0).read().split())
 A,B,C,D=zip(L[::2],L[1::2])
-R=range
+R,U=range,[0,0,1,-1]
 def K(s,e,v):
  q=[(*s,0)];v[s[0]][s[1]]=1
  for x,y,c in q:
   if(x,y)==e:return c
   for i in R(4):
-   X,Y=x+[0,0,1,-1][i],y+[1,-1,0,0][i]
+   X,Y=x+U[i],y+U[3-i]
    if 0<=X<=N and 0<=Y<=M and not v[X][Y]:v[X][Y]=x,y;q+=[(X,Y,c+1)]
  return 1e5
 def f(a,b,c,d):
