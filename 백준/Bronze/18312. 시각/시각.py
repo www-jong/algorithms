@@ -1,8 +1,3 @@
 n,K=input().split()
 a=[str(i).zfill(2) for i in range(60)]
-res=0
-for i in a[:int(n)+1]:
-    for j in a:
-        for k in a:
-            if K in i+j+k:res+=1
-print(res)
+print(sum([1 for k in a for j in a for i in a[:int(n)+1]if K in i+j+k]))
