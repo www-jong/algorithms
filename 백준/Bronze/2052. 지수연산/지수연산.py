@@ -1,2 +1,1 @@
-N=int(input())
-print('0.'+str(5**N).zfill(N))
+print(f"0.{5**(n:=int(input())):0{n}}")
