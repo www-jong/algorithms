@@ -1,8 +1,7 @@
 from collections import deque
 def solution(board):
-    d=[0,0,1,-1]
     N,M=len(board),len(board[0])
-    answer = 0
+    d=[0,0,1,-1]
     st,end=0,0
     for i in range(N):
         for j in range(M):
@@ -10,10 +9,11 @@ def solution(board):
                 st=[i,j]
             if board[i][j]=='G':
                 end=[i,j]
+    res=10**9
     visit=[[-1]*M for _ in range(N)]
     q=deque()
-    q.append((*st,0))
     visit[st[0]][st[1]]=0
+    q.append((*st,0))
     while q:
         x,y,c=q.popleft()
         for i in range(4):
