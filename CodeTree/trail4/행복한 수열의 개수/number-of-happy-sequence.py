@@ -21,4 +21,10 @@ for i in range(n):
         if not yf and y[0]>=m:
             res+=1
             yf=1
+    if not xf and x[0]>=m:
+        res+=1
+        xf=1
+    if not yf and y[0]>=m:
+        res+=1
+        yf=1
 print(res)
