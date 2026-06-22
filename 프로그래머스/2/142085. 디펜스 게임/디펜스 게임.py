@@ -1,23 +1,22 @@
 def solution(n, k, enemy):
-    if k>=len(enemy):
-        return len(enemy)
+    m=len(enemy)
+    li=[0]*m
+    li[0]=enemy[0]
+    for i in range(1,m):
+        li[i]=li[i-1]+enemy[i]
+    st,end=0,m-1
     res=0
-    st,end=0,len(enemy)-1
-    t=[0]*(len(enemy))
-    t[0]=enemy[0]
-    for i in range(1,len(enemy)):
-        t[i]=t[i-1]+enemy[i]
     while st<=end:
         mid=(st+end)//2
-        if t[mid]<=n:
-            res=max(res,mid+1)
+        if li[mid]<=n:
+            res=max(res,mid)
             st=mid+1
             continue
-        tmp=sorted(enemy[:mid+1])
-        v=sum(tmp[:max(len(tmp)-k,0)])
-        if v<=n:
+        tmp=sorted(enemy[:mid+1])[:max(0,mid+1-k)]
+        tmp_sum=sum(tmp)
+        if tmp_sum<=n:
+            res=max(res,mid)
             st=mid+1
-            res=max(res,mid+1)
         else:
             end=mid-1
-    return res
+    return res+1
