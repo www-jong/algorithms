@@ -1,0 +1,10 @@
+def solution(number, k):
+    q=[]
+    for i in number:
+        while k>0 and q and q[-1]<i:
+            q.pop()
+            k-=1
+        q.append(i)
+
+
+    return ''.join(q[:len(q)-k])
