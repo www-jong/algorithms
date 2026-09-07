@@ -1,10 +1,10 @@
 # [level 0] flag에 따라 다른 값 반환하기 - 181933 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181933) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181933?language=cpp) 
 
 ### 성능 요약
 
-메모리: 9.3 MB, 시간: 0.00 ms
+메모리: 4.76 MB, 시간: 0.02 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2026년 04월 16일 19:29:12
+2026년 09월 07일 21:06:01
 
 ### 문제 설명
 
