@@ -1,10 +1,10 @@
 # [level 0] 이어 붙인 수 - 181928 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181928) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181928?language=cpp) 
 
 ### 성능 요약
 
-메모리: 9.4 MB, 시간: 0.03 ms
+메모리: 4.95 MB, 시간: 0.02 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2026년 04월 16일 19:44:52
+2026년 09월 07일 20:20:54
 
 ### 문제 설명
 
