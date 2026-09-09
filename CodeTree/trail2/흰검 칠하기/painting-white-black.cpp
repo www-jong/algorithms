@@ -1,62 +1,59 @@
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
-const int MAX = 200005;
-const int OFFSET = 100000;
 
 int N;
-int now = OFFSET;
+const int MAX=200002;
+int now=100000;
 
-int cnt_w[MAX]; // 흰색 칠한 횟수
-int cnt_b[MAX]; // 검은색 칠한 횟수
-int li[MAX];    // 0: 없음, 1: 흰색, 2: 검은색, 3: 회색
-
+int li_w[MAX];
+int li_b[MAX];
+int li[MAX];
+vector<int> answer(3);
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
     cin >> N;
     
-    for (int j = 0; j < N; j++) {
+    for(int j=0;j<N;j++){
         int a;
         char b;
-        cin >> a >> b;
-
-        if (b == 'L') {
-            for (int i = 0; i < a; i++) {
-                if (li[now] != 3) {
-                    cnt_w[now]++;
-                    if (cnt_w[now] >= 2 && cnt_b[now] >= 2) {
-                        li[now] = 3;
-                    } else {
-                        li[now] = 1;
+        cin >> a>>b;
+        if(b=='L'){
+            for(int i=0;i<a;i++){
+                if(li[now]!=3){
+                    li_w[now]++;
+                    if(li_w[now]>=2&&li_b[now]>=2){
+                        li[now]=3;
+                    }else{
+                        li[now]=1;
                     }
                 }
-                if (i < a - 1) now--; // 마지막 칸에서는 멈춤
+                if(i<a-1)now--;
             }
-        } else {
-            for (int i = 0; i < a; i++) {
-                if (li[now] != 3) {
-                    cnt_b[now]++;
-                    if (cnt_w[now] >= 2 && cnt_b[now] >= 2) {
-                        li[now] = 3;
-                    } else {
-                        li[now] = 2;
+        }else{
+            for(int i=0;i<a;i++){
+                if(li[now]!=3){
+                    li_b[now]++;
+                    if(li_w[now]>=2&&li_b[now]>=2){
+                        li[now]=3;
+                    }else{
+                        li[now]=2;
                     }
                 }
-                if (i < a - 1) now++; // 마지막 칸에서는 멈춤
+                if(i<a-1)now++;
             }
         }
     }
 
-    int white = 0, black = 0, gray = 0;
-    for (int i = 0; i < MAX; i++) {
-        if (li[i] == 1) white++;
-        else if (li[i] == 2) black++;
-        else if (li[i] == 3) gray++;
+    for(int i=0;i<MAX;i++){
+        if(li[i]==1){
+            answer[0]++;
+        }else if(li[i]==2){
+            answer[1]++;
+        }else if(li[i]==3){
+            answer[2]++;
+        }
     }
-
-    cout << white << " " << black << " " << gray << "\n";
+    cout << to_string(answer[0])+" " << to_string(answer[1])+" " << to_string(answer[2]);
     return 0;
 }
