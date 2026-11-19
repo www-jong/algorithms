@@ -1,5 +1,5 @@
 import sys
-sys.setrecursionlimit(10**6)
+input=sys.stdin.readline
 n = int(input())
 edges = [tuple(map(int, input().split())) for _ in range(n - 1)]
 
